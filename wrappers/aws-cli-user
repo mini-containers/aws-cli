@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# This wrapper will mount credentials from `$HOME` unless that variable
+# is undefined. It will fall-back to current directory (`$PWD`) and create
+# the `.aws` folder in it.
+
+exec docker run -it -v ${HOME:-$PWD}/.aws:/home/aws/.aws --rm mini/aws-cli "$@"

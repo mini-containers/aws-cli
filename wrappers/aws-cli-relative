@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# This wrapper will mount credentials relative to the parent directory where
+# the script is contained.
+#
+# It will also mount the parent directory as `/data`, allowing you to copy
+# content from your local system into the target (S3) or vice versa.
+#
+# Is recommended you place this script in `bin` directory of your project,
+# which then will find the relative parent directory from it.
+
+script_path=$(readlink -f $0)
+script_dir=$(dirname $script_path)
+script_parent=$(dirname $script_dir)
+
+exec docker run -it -v $script_parent/.aws:/home/aws/.aws -v $script_parent:/data --rm mini/aws-cli "$@"
