@@ -7,7 +7,7 @@ Alpine-powered container for [Amazon Web Services CLI](http://docs.aws.amazon.co
 You can simply run this container using `docker run`:
 
 ```
-docker run -it --rm mini/aws-cli help
+docker run -i --rm mini/aws-cli help
 ```
 
 This container will not have access to your credentials, but you can expose
@@ -15,7 +15,7 @@ them using AWS supported environment variables (`AWS_ACCESS_KEY_ID`,
 `AWS_SECRET_ACCESS_KEY`):
 
 ```
-docker run -it -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY --rm mini/aws-cli help
+docker run -i -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY --rm mini/aws-cli help
 ```
 
 Above example will pass your current environment variables into the container.
@@ -26,7 +26,7 @@ Another approach will be sharing your `~/.aws` directory instead, mounting
 the volume against `/home/aws/.aws` of the container:
 
 ```
-docker run -it -v $HOME/.aws:/home/aws/.aws --rm mini/aws-cli help
+docker run -i -v $HOME/.aws:/home/aws/.aws --rm mini/aws-cli help
 ```
 
 ### Wrappers
@@ -46,7 +46,7 @@ This container also exposes `/data` as bind mount volume and can be used when
 copying local content to a target (S3 bucket) might be required:
 
 ```
-docker run -it -v $PWD:/data --env-file creds mini/aws-cli s3 sync s3://my-bucket my-copy
+docker run -i -v $PWD:/data --env-file creds mini/aws-cli s3 sync s3://my-bucket my-copy
 ```
 
 ## Sponsor

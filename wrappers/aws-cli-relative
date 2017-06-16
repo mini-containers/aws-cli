@@ -13,4 +13,4 @@ script_path=$(readlink -f $0)
 script_dir=$(dirname $script_path)
 script_parent=$(dirname $script_dir)
 
-exec docker run -it -v $script_parent/.aws:/home/aws/.aws -v $script_parent:/data --rm mini/aws-cli "$@"
+exec docker run -i -v $script_parent/.aws:/home/aws/.aws -v $script_parent:/data --rm mini/aws-cli "$@"
